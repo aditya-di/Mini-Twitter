@@ -1,0 +1,3 @@
+gateway: FLASK_APP=gateway flask run -p $PORT
+userService: FLASK_APP=/Users/adityadingre/Desktop/workplace/Mini-Twitter/Project-2/api/userService flask run -p $PORT
+timelineService: FLASK_APP=/Users/adityadingre/Desktop/workplace/Mini-Twitter/Project-2/api/timelineService flask run -p $PORT

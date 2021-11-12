@@ -1,0 +1,49 @@
+# welcome
+ http -f GET http://127.0.0.1:5000/
+
+# users/
+http -f POST http://127.0.0.1:5000/users  userName=test1 emailID=test1@gmail.com password=authtest1
+http -f POST http://127.0.0.1:5000/users  userName=test2 emailID=test2@gmail.com password=authtest2
+http -f POST http://127.0.0.1:5000/users  userName=test3 emailID=test3@gmail.com password=authtest3
+http -f POST http://127.0.0.1:5000/users  userName=test4 emailID=test4@gmail.com password=authtest4
+http -f POST http://127.0.0.1:5000/users  userName=test5 emailID=test5@gmail.com password=authtest5
+
+# login/
+http -f POST http://127.0.0.1:5000/login  userName=test1 password=authtest1
+
+# users/follow/ start following[POST]
+http -f POST http://127.0.0.1:5000/users/follow followerUser=test1 followedUser=test2
+http -f POST http://127.0.0.1:5000/users/follow followerUser=test1 followedUser=test3
+http -f POST http://127.0.0.1:5000/users/follow followerUser=test1 followedUser=test4
+http -f POST http://127.0.0.1:5000/users/follow followerUser=test1 followedUser=test5
+--violate since test99 user does not exists
+http -f POST http://127.0.0.1:5000/users/follow followerUser=test99 followedUser=test5
+
+# users/follwers/ stop following[DELETE]
+http -f DELETE http://127.0.0.1:5000/users/unfollow followerUser=test1 followedUser=test5
+------------------------------------------------------------------------------------
+## timeline service
+# tweet/
+http -f POST http://127.0.0.1:5100/tweet userName=test1 password=authtest1 postText=Testpost1
+http -f POST http://127.0.0.1:5100/tweet userName=test1 password=authtest1 postText=Testpost2
+..
+http -f POST http://127.0.0.1:5100/tweet userName=test1 password=authtest1 postText=Testpost26
+http -f POST http://127.0.0.1:5100/tweet userName=test2 password=authtest2 postText=Testpost#2
+http -f POST http://127.0.0.1:5100/tweet userName=test3 password=authtest3 postText=Testpost#3
+http -f POST http://127.0.0.1:5100/tweet userName=test4 password=authtest4 postText=Testpost#4
+http -f POST http://127.0.0.1:5100/tweet userName=test5 password=authtest5 postText=Testpost#5
+http -f POST http://127.0.0.1:5100/tweet userName=test5 password=authtest5 postText=Testpost#56
+-- invalid post
+http -f POST http://127.0.0.1:5100/tweet userName=test99 password=authtest5 postText=Testpost
+http -f POST http://127.0.0.1:5100/tweet userName=test5 password=authtest99 postText=Testpost#56
+
+# recent-timeline/
+http -f GET http://127.0.0.1:5100/recent-timeline userName=test1
+
+# /public-timeline
+http -f GET http://127.0.0.1:5100/public-timeline
+
+# /my-timeline
+http -f GET http://127.0.0.1:5100/my-timeline userName=test1 password=authtest1
+--invalid
+http -f GET http://127.0.0.1:5100/my-timeline userName=test1 password=authtest99

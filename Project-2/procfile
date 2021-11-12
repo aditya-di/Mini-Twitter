@@ -1,0 +1,2 @@
+userService: FLASK_APP=api/userService FLASK_ENV=development flask run -p $PORT
+timelineService: FLASK_APP=api/timelineService FLASK_ENV=development flask run -p $PORT

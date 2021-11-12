@@ -1,0 +1,24 @@
+# Every request is processed through gateway http://127.0.0.1:5000/
+
+# login
+http -f POST http://127.0.0.1:5000/login  userName=test1 password=authtest1
+--  fail
+http -f POST http://127.0.0.1:5000/login  userName=test1 password=authtest99
+
+# users/
+http -f POST http://127.0.0.1:5000/users  userName=API_user3 emailID=API_user3@gmail.com password=API_user3
+
+# /users/follow
+http -a API_user3:API_user3 -f POST http://127.0.0.1:5000/users/follow followerUser=API_user3 followedUser=API_user3
+--  fail
+http -a API_user3:API_user99 -f POST http://127.0.0.1:5000/users/follow followerUser=API_user3 followedUser=API_user3
+
+# /users/unfollow
+http -a API_user3:API_user3 -f DELETE http://127.0.0.1:5000/users/unfollow followerUser=API_user3 followedUser=API_user3
+--  fail
+http -a API_user3:API_user99 -f DELETE http://127.0.0.1:5000/users/unfollow followerUser=API_user3 followedUser=API_user3
+------------------------------------------------------------------------------------
+# tweet
+http -a API_user3:API_user3 -f POST http://127.0.0.1:5000/tweet userName=API_user3 password=API_user3 postText=TestpostAPI1
+--fail
+http -a API_user3:API_user99 -f POST http://127.0.0.1:5000/tweet userName=API_user3 password=API_user3 postText=TestpostAPI1

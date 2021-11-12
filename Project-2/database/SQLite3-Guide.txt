@@ -1,0 +1,7 @@
+1. Start with sqlite3 - Open terminal; type sqlite3
+2. To create new data base - user.db press enter
+3. To clear the screen - .shell clear
+4. To list the tables in db - .tables
+5. To display table headers - .headers on
+6. Trun column mode on - .mode column
+. To exit the sqlite3 - .quit
