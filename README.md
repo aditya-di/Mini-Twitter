@@ -40,4 +40,8 @@ This repository contains a set of projects covered for [CPSC-449 Web-Backend dev
 ### Project - 4
 - Project-4 uses the two services created in above project - *userService and timelineService* and a **gateway** is implemented that works as a *[reverse proxy](https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/)* 
   that listens to the client requests and send it to the appropriate webserver of the service.
-- All the requests are authenticated and a round robin policy is used for **load balancing** the requests.  
+- All the requests are authenticated and a round robin policy is used for **load balancing** the requests. 
+- Run following command to start the project: 
+```
+    foreman start userService=3,timelineService=3,gateway=1
+```
